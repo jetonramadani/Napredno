@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
 public class TripleTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -28,6 +33,33 @@ public class TripleTest {
     }
 }
 // vasiot kod ovde
-// class Triple
+ class Triple <T extends Number & Comparable<T>> {
+    List<T> nums;
+    public Triple(T a, T b, T c) {
+        nums = new ArrayList<T>();
+        nums.add(a);
+        nums.add(b);
+        nums.add(c);
+    }
+    public double max() {
+        return nums.stream().mapToDouble(item -> Double.parseDouble(String.valueOf(item))).max().orElseThrow(RuntimeException::new);
+    }
+    public double avarage(){
+        return nums.stream().mapToDouble(item -> Double.parseDouble(String.valueOf(item))).sum() / nums.size();
+    }
+    public void sort() {
+        nums.sort(Comparator.naturalOrder());
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < nums.size(); i++) {
+            str.append(String.format("%.2f", Double.parseDouble(String.valueOf(nums.get(i)))));
+            if (i != nums.size() - 1)
+                str.append(" ");
+        }
+        return str.toString();
+    }
+}
 
